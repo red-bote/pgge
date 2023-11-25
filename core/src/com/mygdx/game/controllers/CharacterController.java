@@ -13,23 +13,25 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.mygdx.game;
+package com.mygdx.game.controllers;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
+import com.mygdx.game.screens.InputMapper;
 
-public class MyGdxGame extends Game {
+public class CharacterController implements ControllerAbstraction {
 
-    @Override
-    public void create() {
-        Gdx.input.setCatchBackKey(true);
-        GameWorld.getInstance().initialize(this);
+    InputMapper.ControlBundle controlBundle;
+
+    public InputMapper.ControlBundle getControlBundle() {
+        return controlBundle;
     }
 
-    @Override
-    public void dispose() {
-        // Make Game World disposable ... Note this only seems to be incurred in Desktop lwjgl environment (Alt+F4).
-        // ( btw Screen:dispose() is not called automatically by framework )
-        GameWorld.getInstance().dispose();  // dispose the current screen
+    public void setControlBundle(InputMapper.ControlBundle cbundle){
+        this.controlBundle = cbundle;
+    }
+
+    public void updateControls(float time) { // implements abstract method
+    }
+
+    public void destroy(){ // MT override it
     }
 }
